@@ -36,19 +36,15 @@ public class ErrorHandler extends HttpServlet {
             String subject = "Error Notification";
             EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML);
             emailThread1.start();
-//            try {
-//                emailThread1.join();
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//            String errorMessage = emailThread1.getErrorMessage();
-//            if (errorMessage.isEmpty()) {
-//                // set send-success attribute
-//                System.out.println("Message sent to " + toEmailAddress);
-//            } else {
-//                // Set send-error attribute
-//                System.out.println("Message not sent to " + toEmailAddress + " - " + errorMessage);
-//            }
+            try {
+                emailThread1.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            errorMsg = emailThread1.getErrorMessage();
+            if (errorMsg.isEmpty()) {
+                errorMsg = "A notification has been sent to the administrator";
+            }
         }
 
 
