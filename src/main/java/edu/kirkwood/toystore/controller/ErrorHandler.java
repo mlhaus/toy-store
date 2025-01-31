@@ -33,18 +33,19 @@ public class ErrorHandler extends HttpServlet {
                     </html>
                     """, errorMsg);
             String toEmailAddress = Config.getEnv("ADMIN_EMAIL");
-            String subject = "Error Notification";
-            EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML);
-            emailThread1.start();
-            try {
-                emailThread1.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            errorMsg = emailThread1.getErrorMessage();
-            if (errorMsg.isEmpty()) {
-                errorMsg = "A notification has been sent to the administrator";
-            }
+            errorMsg = toEmailAddress;
+//            String subject = "Error Notification";
+//            EmailThread emailThread1 = new EmailThread(toEmailAddress, subject, bodyHTML);
+//            emailThread1.start();
+//            try {
+//                emailThread1.join();
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            errorMsg = emailThread1.getErrorMessage();
+//            if (errorMsg.isEmpty()) {
+//                errorMsg = "A notification has been sent to the administrator";
+//            }
         }
 
 
