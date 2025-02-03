@@ -8,3 +8,4 @@ public class Config {
                 .orElseThrow(() -> new IllegalStateException("Environment variable " + key + " is not set"));
     }
 }
+

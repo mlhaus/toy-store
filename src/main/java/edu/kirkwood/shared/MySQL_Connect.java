@@ -16,6 +16,10 @@ public class MySQL_Connect {
         try {
             connectionString = Config.getEnv("AZURE_MYSQL_CONNECTIONSTRING");
         } catch(IllegalStateException e) {
+            throw new SQLException(e.getMessage());
+        }
+        
+        if(connectionString == null) {
             throw new SQLException("Connection string not found");
         }
 
