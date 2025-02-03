@@ -15,10 +15,9 @@ import java.util.List;
 public class AdminUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
-//        List<User> users = UserDAO.getAll();
-//        req.setAttribute("users", users);
-//        req.setAttribute("pageTitle", "All Users");
-//        req.getRequestDispatcher("WEB-INF/admin-users.jsp").forward(req, resp);
+        List<User> users = UserDAO.getAll();
+        req.setAttribute("users", users);
+        req.setAttribute("pageTitle", "All Users");
+        req.getRequestDispatcher("WEB-INF/admin-users.jsp").forward(req, resp);
     }
 }
