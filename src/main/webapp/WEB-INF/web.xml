@@ -31,12 +31,16 @@
     </context-param>
     <context-param>
         <param-name>debugging</param-name>
-        <param-value>true</param-value>
+        <param-value>false</param-value>
     </context-param>
 
     <error-page>
         <error-code>404</error-code>
         <location>/fileNotFound</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorHandler</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>

@@ -11,7 +11,7 @@ public class MySQL_Connect {
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL driver not found");
         }
-        
+
         String connectionString = "";
         try {
             connectionString = Config.getEnv("AZURE_MYSQL_CONNECTIONSTRING");
