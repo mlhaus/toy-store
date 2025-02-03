@@ -9,6 +9,7 @@
                     <c:otherwise>
                         <h2>Oh no!</h2>
                         <p class="mb-4">Something went wrong. We are sorry for the inconvenience.</p>
+                        <p>${errorMsg}</p>
                         <a href="${appURL}" class="btn btn-primary">Take me to the Homepage</a>
                     </c:otherwise>
                 </c:choose>
