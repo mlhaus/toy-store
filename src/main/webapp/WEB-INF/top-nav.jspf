@@ -31,8 +31,17 @@
                         <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                     </form>
                     <div class="text-end">
-                        <a href="#" class="btn btn-outline-dark me-2">Login</a>
-                        <a href="${appURL}/signup" class="btn btn-warning">Sign-up</a>
+                        <c:choose>
+                            <c:when test="${empty sessionScope.activeUser}">
+                                <a href="#" class="btn btn-outline-dark me-2">Login</a>
+                                <a href="${appURL}/signup" class="btn btn-warning">Sign-up</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="#" class="btn btn-outline-secondary me-2">Sign out</a>
+                                <a href="#" class="btn btn-primary">My Profile</a>
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </div>
                 </div>
             </div>
