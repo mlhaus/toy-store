@@ -49,12 +49,24 @@ public class Login extends HttpServlet {
             if (!passwordMatches) {
                 req.setAttribute("loginFail",  "The password you entered is incorrect."); // For security, it might be better to just say "No user found".
             } else {
+                if(!user.getStatus().equals("active")) {
+                    // The user's account is not active
+                    req.setAttribute("loginFail",  "Your account is locked or inactive. Please reset your password.");
+                    req.setAttribute("pageTitle", "Login");
+                    req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
+                    return;
+                }
+                
                 // Successful login
                 user.setPassword(null); // Remove the password before setting the User object as a session attribute
 
                 HttpSession session = req.getSession(); // Get existing HttSession object
                 session.invalidate(); // Remove any existing session attributes
                 session = req.getSession(); // Create new HttpSession
+                // session.removeAttribute("activeUser"); // Instead of destroying all attributes, remove only the ones necessary
+                if(rememberMe != null && rememberMe[0].equals("true")) {
+                    session.setMaxInactiveInterval(30 * 24 * 60 * 60); // represented in seconds
+                }
                 session.setAttribute("activeUser", user);
                 session.setAttribute("flashMessageSuccess", String.format("Welcome back%s!", (user.getFirstName() != null && !user.getFirstName().equals("") ? " " + user.getFirstName() : "")));
 
