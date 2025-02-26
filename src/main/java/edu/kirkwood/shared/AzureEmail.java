@@ -2,11 +2,11 @@ package edu.kirkwood.shared;
 
 import com.azure.communication.email.EmailClient;
 import com.azure.communication.email.EmailClientBuilder;
+import com.azure.communication.email.models.EmailAddress;
 import com.azure.communication.email.models.EmailMessage;
 import com.azure.communication.email.models.EmailSendResult;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
-import org.jsoup.Jsoup;
 
 public class AzureEmail {
     public static EmailClient getEmailClient() {
@@ -15,26 +15,28 @@ public class AzureEmail {
         EmailClient emailClient = new EmailClientBuilder()
                 .connectionString(connectionString)
                 .buildClient();
+
         return emailClient;
     }
+
     public static String sendEmail(String toEmailAddress, String subject, String bodyHTML) {
         EmailClient emailClient = getEmailClient();
-        String body = Jsoup.parse(bodyHTML).text();
-        EmailMessage message = new EmailMessage()
+        EmailAddress toAddress = new EmailAddress(toEmailAddress);
+        String body = Helpers.html2text(bodyHTML);
+        EmailMessage emailMessage = new EmailMessage()
                 .setSenderAddress(Config.getEnv("AZURE_EMAIL_FROM"))
-                .setToRecipients(toEmailAddress)
+                .setToRecipients(toAddress)
                 .setSubject(subject)
                 .setBodyPlainText(body)
                 .setBodyHtml(bodyHTML);
-        String error = "";
         SyncPoller<EmailSendResult, EmailSendResult> poller = null;
         try {
-            poller = emailClient.beginSend(message);
+            poller = emailClient.beginSend(emailMessage, null);
         } catch(RuntimeException e) {
-            error = e.getMessage();
+            return e.getMessage();
         }
-        PollResponse<EmailSendResult> response = poller.waitForCompletion();
-//        System.out.println("Operation Id: " + response.getValue().getId());
-        return error;
+        PollResponse<EmailSendResult> result = poller.waitForCompletion();
+
+        return "";
     }
 }

@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
                     // The user's account is not active
                     req.setAttribute("loginFail",  "Your account is locked or inactive. Please reset your password.");
                     req.setAttribute("pageTitle", "Login");
-                    req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
+                    req.getRequestDispatcher("WEB-INF/dat/login.jsp").forward(req, resp);
                     return;
                 }
                 // Successful login
