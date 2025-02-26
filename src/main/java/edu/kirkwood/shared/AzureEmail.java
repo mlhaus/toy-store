@@ -22,11 +22,13 @@ public class AzureEmail {
     public static String sendEmail(String toEmailAddress, String subject, String bodyHTML) {
         EmailClient emailClient = getEmailClient();
         EmailAddress toAddress = new EmailAddress(toEmailAddress);
+        EmailAddress replyToAddress = new EmailAddress(Config.getEnv("ADMIN_EMAIL"));
         String body = Helpers.html2text(bodyHTML);
         EmailMessage emailMessage = new EmailMessage()
                 .setSenderAddress(Config.getEnv("AZURE_EMAIL_FROM"))
                 .setToRecipients(toAddress)
                 .setSubject(subject)
+                .setReplyTo(replyToAddress)
                 .setBodyPlainText(body)
                 .setBodyHtml(bodyHTML);
         SyncPoller<EmailSendResult, EmailSendResult> poller = null;
