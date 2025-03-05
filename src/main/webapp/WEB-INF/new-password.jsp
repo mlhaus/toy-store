@@ -18,7 +18,7 @@
                             <form method="post" action="${appURL}/new-password">
                                 <!-- Password -->
                                 <div class="mb-4">
-                                    <label for="inputPassword1" class="form-label">Password *</label>
+                                    <label for="password1" class="form-label">Password *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
                                         <input type="password" class="form-control <c:if test="${not empty password1Error }">is-invalid</c:if> border-0 bg-light rounded-end ps-1" placeholder="*********" id="password1" name="password1" value="${password1}">
@@ -27,7 +27,7 @@
                                 </div>
                                 <!-- Confirm Password -->
                                 <div class="mb-4">
-                                    <label for="inputPassword2" class="form-label">Confirm Password *</label>
+                                    <label for="password2" class="form-label">Confirm Password *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
                                         <input type="password" class="form-control <c:if test="${not empty password2Error }">is-invalid</c:if>  border-0 bg-light rounded-end ps-1" placeholder="*********" id="password2" name="password2" value="${password2}">
