@@ -23,7 +23,7 @@
                                 <!-- First name -->
                                 <div class="col-md-6">
                                     <label class="form-label" for="firstName">First Name</label>
-                                    <input class="<c:if test="${not empty firstNameError}">is-invalid</c:if> form-control" type="text" id="firstName" name="firstName" value="${sessionScope.activeUser.firstName}">
+                                    <input class="<c:if test="${not empty firstNameError}">is-invalid</c:if> form-control" type="text" id="firstName" name="firstName" value="${fn:escapeXml(sessionScope.activeUser.firstName)}">
                                     <c:if test="${not empty firstNameError}"><div class="invalid-feedback">${firstNameError}</div></c:if>
                                 </div>
 

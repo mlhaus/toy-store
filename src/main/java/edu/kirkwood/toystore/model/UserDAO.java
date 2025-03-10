@@ -2,6 +2,7 @@ package edu.kirkwood.toystore.model;
 
 import edu.kirkwood.shared.EmailThread;
 import jakarta.servlet.http.HttpServletRequest;
+import okhttp3.Call;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.CallableStatement;
@@ -211,5 +212,14 @@ public class UserDAO {
         return false;
     }
 
-    
+    public static boolean delete(User user) {
+        try(Connection connection = getConnection()) {
+            CallableStatement statement = connection.prepareCall("{CALL sp_delete_user(?)}");
+            statement.setInt(1, user.getUserId());
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

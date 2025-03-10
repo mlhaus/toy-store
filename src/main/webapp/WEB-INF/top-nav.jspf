@@ -23,6 +23,9 @@
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="${appURL}/users">All Users</a></li>
+                                <li><a class="dropdown-item" href="${appURL}/vendors">All Vendors</a></li>
+                                <li><a class="dropdown-item" href="${appURL}/products">All Products</a></li>
+                                <li><a class="dropdown-item" href="${appURL}/orders">All Orders</a></li>
                             </ul>
                         </li>
                         </c:if>
