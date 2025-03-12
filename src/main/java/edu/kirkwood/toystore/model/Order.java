@@ -1,6 +1,7 @@
 package edu.kirkwood.toystore.model;
 
 import java.time.Instant;
+import java.util.Date;
 
 public class Order {
     private int orderNum;
@@ -28,6 +29,10 @@ public class Order {
 
     public Instant getOrderDate() {
         return orderDate;
+    }
+    
+    public Date getOrderDateDate() {
+        return Date.from(orderDate);
     }
 
     public void setOrderDate(Instant orderDate) {

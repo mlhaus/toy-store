@@ -1,8 +1,9 @@
 
 <div class="container py-4">
     <h2>Products</h2>
-    <div class="table-responsive small">
-        <table class="table table-striped table-sm">
+    <p class="lead">There ${fn:length(products) == 1 ? "is" : "are"}&nbsp;${fn:length(products)} product${fn:length(products) != 1 ? "s" : ""}</p>
+    <div class="table-responsive large">
+        <table class="table table-striped table-lg">
             <thead>
             <tr>
                 <th scope="col"></th>
@@ -16,8 +17,8 @@
             <c:forEach items="${products}" var="product">
             <tr>
                 <td>
-                    <a href="update-product?id=${product.id}" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Update</a>
-                    <a href="delete-product?id=${product.id}" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Delete</a>
+                    <a href="update-product?id=${product.id}" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Update</a>
+                    <a href="delete-product?id=${product.id}" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Delete</a>
                 </td>
                 <td class="align-middle">${product.name}</td>
                 <td class="align-middle">${product.description}</td>
@@ -29,4 +30,3 @@
         </table>
     </div>
 </div>
-<

@@ -11,8 +11,8 @@
                 </c:choose>
             </p>
             <c:if test="${users.size() > 0}">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="table-responsive-xxl">
+                    <table class="table table-striped">
                         <thead>
                         <tr>
                             <th scope="col"></th>
