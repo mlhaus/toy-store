@@ -23,7 +23,7 @@
                         <a href="${appURL}/delete-vendor?id=${vendor.vend_id}" class="btn btn-sm btn-outline-danger">Delete</a>
                     </td>
                     <td>${vendor.vend_id}</td>
-                    <td><a href="${appURL}/view-vendor?id=${vendor.vend_id}">${vendor.vend_name}</a></td>
+                    <td>${vendor.vend_name}</td>
                     <td>${vendor.address.address}</td>
                     <td>${vendor.address.city}</td>
                     <td>${vendor.address.state}</td>
