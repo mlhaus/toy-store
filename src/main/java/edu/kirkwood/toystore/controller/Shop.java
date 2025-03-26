@@ -16,9 +16,23 @@ import java.util.List;
 public class Shop extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int limit = 5;
+        String limitStr = req.getParameter("limit");
+        int limit = 10;
+        try {
+            limit = Integer.parseInt(limitStr);
+        } catch (NumberFormatException e) {
+            if (limit < 0) {
+                limit = 10;
+            }
+        }
         int offset = 0;
-        String categories = "1,2";
+        String[] categoriesArr = req.getParameterValues("categories");
+        String categories = "";
+        if (categoriesArr != null && categoriesArr.length > 0) {
+            categories = String.join(",", categoriesArr);
+        }
+        req.setAttribute("categories", categories);
+        req.setAttribute("limit", limit);
         List<Product> products = ProductDAO.getProducts(limit, offset, categories);
         req.setAttribute("products", products);
         List<ProductCategory> productCategories = ProductDAO.getAllCategories();
