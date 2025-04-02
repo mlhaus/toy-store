@@ -34,7 +34,7 @@ public class Shop extends HttpServlet {
         if (categoriesArr != null && categoriesArr.length > 0) {
             categories = String.join(",", categoriesArr);
         }
-        req.setAttribute("categories", categories);
+        req.setAttribute("categoriesArr", categoriesArr);
 
         // Get the total product count and page count
         int totalProducts = ProductDAO.getProductCount(categories);
