@@ -1,5 +1,7 @@
 package edu.kirkwood.toystore.model;
 
+import java.util.Objects;
+
 public class Product {
     private String id;
     private String name;
@@ -29,6 +31,14 @@ public class Product {
         this.description = description;
         this.vendorId = vendorId;
         this.vendorName = vendorName;
+    }
+
+    // This constructor is for product verification during add-to-cart process
+    public Product(String id, String name, double price, String description) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
     }
 
     public String getId() {
@@ -103,5 +113,17 @@ public class Product {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(price, product.price) == 0 && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, description);
     }
 }

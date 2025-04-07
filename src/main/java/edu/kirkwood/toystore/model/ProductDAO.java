@@ -14,7 +14,7 @@ import static edu.kirkwood.shared.MySQL_Connect.getConnection;
 public class ProductDAO{
 
     public static void main(String[] args) {
-        System.out.println(getProductCount("2,3"));
+        System.out.println(getProduct("DOL0011"));
     }
 
     // This method get products for the Shop page.
@@ -94,5 +94,24 @@ public class ProductDAO{
             System.out.println(e.getMessage());
         }
         return 0;
+    }
+
+    public static Product getProduct(String id) {
+        Product product = null;
+        try(Connection connection = getConnection()) {
+            CallableStatement statement = connection.prepareCall("{CALL sp_get_product(?)}");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                String prod_id = rs.getString("prod_id");
+                String name = rs.getString("prod_name");
+                double price = rs.getDouble("prod_price");
+                String description = rs.getString("prod_desc");
+                product = new Product(prod_id, name, price, description);
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException("Database error - " + e.getMessage());
+        }
+        return product;
     }
 }
