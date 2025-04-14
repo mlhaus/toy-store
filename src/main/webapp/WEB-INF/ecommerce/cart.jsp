@@ -84,9 +84,10 @@
                                         <%-- Add shipping, subtract discount --%>
                                         <h5><fmt:formatNumber value="${cart.totalPrice}" type="currency"></fmt:formatNumber></h5>
                                     </div>
-
-                                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
+                                    <form action="${appURL}/checkout" method="GET">
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
                                              data-mdb-ripple-color="dark">Check out</button>
+                                    </form>
 
                                 </div>
                             </div>
