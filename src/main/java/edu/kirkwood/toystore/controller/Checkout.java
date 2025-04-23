@@ -73,18 +73,12 @@ public class Checkout extends HttpServlet {
             ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
             if(cart != null) {
                 Double amount = cart.getTotalPrice();
-                CreateTransactionResponse response = (CreateTransactionResponse) ChargeCreditCard.run(amount, ccInfo, billingInfo, shippingInfo, email, sameAddress);
+                String response = ChargeCreditCard.run(amount, ccInfo, billingInfo, shippingInfo, email, sameAddress);
                 // Parse the response to determine results
-                if (response!=null && response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-                    TransactionResponse result = response.getTransactionResponse();
-                    if (result.getMessages() != null) {
-                        session.setAttribute("flashMessageSuccess", "Your order has been processed.");
-                        session.removeAttribute("cart");
-                    } else {
-                        session.setAttribute("flashMessageError", "Something went wrong");
-                    }
+                if (response.contains("Success")) {
+                    session.setAttribute("flashMessageSuccess", response);
                 } else {
-                    session.setAttribute("flashMessageError", "Something went wrong");
+                    session.setAttribute("flashMessageDanger", response);
                 }
             } else {
                 // Cart doesn't exist

@@ -22,15 +22,30 @@ public class OrderDAO {
             CallableStatement statement = connection.prepareCall("{CALL sp_get_all_orders_admin()}");
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                int id = rs.getInt("order_num");
+                int id = rs.getInt("order_id");
                 Instant orderDate = rs.getTimestamp("order_date").toInstant();
-                String customerID = rs.getString("cust_id");
-                String customerName = rs.getString("cust_name");
-                orders.add(new Order(id, orderDate, customerID, customerName));
+                String shipFName = rs.getString("ship_fname");
+                String shipLName = rs.getString("ship_lname");
+                String shipEmail = rs.getString("ship_email");
+                String shipAddress = rs.getString("ship_address");
+                String shipCity = rs.getString("ship_city");
+                String shipState = rs.getString("ship_state");
+                String shipZip = rs.getString("ship_zip");
+                ArrayList<OrderItem> items = new ArrayList<>();
+                // Get order items
+                orders.add(new Order(id, orderDate, shipFName, shipLName, shipEmail, shipAddress, shipCity, shipState, shipZip, items));
             }
         } catch(SQLException e) {
             throw new RuntimeException("Database error - " + e.getMessage());
         }
         return orders;
+    }
+    
+    public static Order getOrder(int id) {
+        return null;
+    }
+    
+    public static ArrayList<OrderItem> getOrderItems(int orderId) {
+        return null;
     }
 }
