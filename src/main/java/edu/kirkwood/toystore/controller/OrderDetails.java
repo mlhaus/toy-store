@@ -33,9 +33,7 @@ public class OrderDetails extends HttpServlet {
 
         }
         Order order = OrderDAO.getOrder(orderId);
-        ArrayList<OrderItem> orderItems = OrderDAO.getOrderItems(orderId);
         req.setAttribute("order", order);
-        req.setAttribute("orderItems", orderItems);
         req.setAttribute("pageTitle", "Details of Order #" + orderId);
         req.getRequestDispatcher("WEB-INF/ecommerce/admin-order-details.jsp").forward(req, resp);
     }

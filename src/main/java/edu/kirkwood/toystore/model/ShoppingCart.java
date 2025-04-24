@@ -63,6 +63,20 @@ public class ShoppingCart {
         return total;
     }
 
+    @Override
+    public String toString() {
+        String json = "[";
+        for(Map.Entry<Product, Integer> entry: contents.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            json += "{";
+            json += String.format("\"prod_id\": \"%s\", \"quantity\": %d, \"price\": %.2f", product.getId(), quantity, product.getPrice() );
+            json += "},";
+        }
+        json = json.substring(0, json.length() - 1) + "]";
+        return json;
+    }
+
     public static void main(String[] args) {
         ShoppingCart sc = new ShoppingCart();
         Product product1 = ProductDAO.getProduct("DOL001");
@@ -79,5 +93,10 @@ public class ShoppingCart {
         });
         System.out.println("There are " + sc.getTotalProductCount() + " products in your cart");
         System.out.println("Your total is " + sc.getTotalPrice());
+        System.out.println(sc);
+        String[] shippingInfo = new String[]{"Test", "User", "111 First Ave", "Iowa City", "IA", "55555"};
+        String email = "test@example.com";
+        int newOrderId = OrderDAO.addOrder(shippingInfo, email, sc.toString());
+        System.out.println(newOrderId);
     }
 }

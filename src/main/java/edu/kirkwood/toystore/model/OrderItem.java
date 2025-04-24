@@ -1,34 +1,38 @@
 package edu.kirkwood.toystore.model;
 
 public class OrderItem {
-    private Order order;
-    private Product product;
+    private String productId;
+    private String productName;
     private int quantity;
     private double price;
+    private double totalPrice;
 
-    public OrderItem(Order order, Product product, int quantity, double price) {
-        this.order = order;
-        this.product = product;
+    public OrderItem() {
+
+    }
+
+    public OrderItem(String productId, String productName, int quantity, double price, double totalPrice) {
+        this.productId = productId;
+        this.productName = productName;
         this.quantity = quantity;
         this.price = price;
-    }
-    
-    public OrderItem() {}
-
-    public Order getOrder() {
-        return order;
+        this.totalPrice = totalPrice;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public String getProductId() {
+        return productId;
     }
 
-    public Product getProduct() {
-        return product;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -47,12 +51,22 @@ public class OrderItem {
         this.price = price;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                ",\"prod_id\"" + product.getId() +
-                "\"quantity\"" + quantity +
-                "\"price\"" + price +
+        return "OrderItem{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }
