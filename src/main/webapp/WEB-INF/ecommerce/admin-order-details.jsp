@@ -1,7 +1,7 @@
 <div class="container py-4">
     <a href="${appURL}/orders" class="btn btn-primary mb-4">View all orders</a>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="card">
                 <div class="card-body mx-4">
                     <div class="container">
@@ -11,49 +11,45 @@
                                 <li class="text-muted mt-1"><span class="text-black">Order</span> #${order.orderID}</li>
                                 <li class="text-black mt-1"><fmt:formatDate value="${order.orderDateDate}" type="date" dateStyle="long" /></li>
                             </ul>
-                            <hr>
-                            <div class="col-xl-10">
-                                <p>Pro Package</p>
-                            </div>
-                            <div class="col-xl-2">
-                                <p class="float-end">$199.00
-                                </p>
-                            </div>
-                            <hr>
                         </div>
                         <div class="row">
-                            <div class="col-xl-10">
-                                <p>Consulting</p>
-                            </div>
-                            <div class="col-xl-2">
-                                <p class="float-end">$100.00
-                                </p>
-                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-5"><p>Product Name</p></div>
+                            <div class="col-2"><p class="float-end">Qty</p></div>
+                            <div class="col-2"><p class="float-end">Price</p></div>
+                            <div class="col-2"><p class="float-end">Total</p></div>
                             <hr>
                         </div>
+                        <c:forEach items="${order.items}" var="item" varStatus="status">
                         <div class="row">
-                            <div class="col-xl-10">
-                                <p>Support</p>
+                            <div class="col-1">${status.count}</div>
+                            <div class="col-5">
+                                <p>${item.productName}</p>
                             </div>
-                            <div class="col-xl-2">
-                                <p class="float-end">$10.00
+                            <div class="col-2">
+                                <p class="float-end"><fmt:formatNumber value="${item.quantity}" />
                                 </p>
                             </div>
-                            <hr style="border: 2px solid black;">
+                            <div class="col-2">
+                                <p class="float-end"><fmt:formatNumber value="${item.price}" type="currency" />
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <p class="float-end"><fmt:formatNumber value="${item.totalPrice}" type="currency" />
+                                </p>
+                            </div>
+                            <hr <c:if test="${status.last}">style="border: 2px solid black;"</c:if>>
+                        </div>
+                        </c:forEach>
                         </div>
                         <div class="row text-black">
 
-                            <div class="col-xl-12">
-                                <p class="float-end fw-bold">Total: $10.00
+                            <div class="col-12">
+                                <p class="float-end fw-bold">Total: <fmt:formatNumber value="${order.totalPrice}" type="currency" />
                                 </p>
                             </div>
                             <hr style="border: 2px solid black;">
                         </div>
-                        <div class="text-center" style="margin-top: 90px;">
-                            <a><u class="text-info">View in browser</u></a>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-
                     </div>
                 </div>
             </div>

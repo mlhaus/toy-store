@@ -116,6 +116,14 @@ public class Order {
     public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
     }
+    
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for(OrderItem item : items) {
+           totalPrice += item.getTotalPrice(); 
+        };
+        return totalPrice;
+    }
 
     @Override
     public String toString() {
