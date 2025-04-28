@@ -37,11 +37,11 @@
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
                             <td>${user.email}</td>
-                            <td>${user.phone}</td>
+                            <td><cfmt:formatPhone value="${user.phone}" /></td>
                             <td>${user.language}</td>
                             <td>${user.status}</td>
                             <td>${user.privileges}</td>
-                            <td>${user.createdAt}</td>
+                            <td><fmt:formatDate  value="${user.createdAtDate}" type="date" dateStyle="medium" /></td>
                             <td>${user.timezone}</td>
                             </c:forEach>
                         </tbody>
