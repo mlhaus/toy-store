@@ -2,32 +2,48 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
             <div class="container-fluid">
-                <a class="navbar-brand fs-3 mb-2" href="${appURL}">Java Toy Store</a>
+                <a class="navbar-brand fs-3 mb-2" href="${appURL}"><fmt:message key="topNav.title" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarsExample09">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link active" aria-current="page" href="${appURL}">Home</a>--%>
-<%--                        </li>--%>
                         <li class="nav-item">
-                            <a class="nav-link" href="${appURL}/shop">Shop</a>
+                            <a class="nav-link" href="${appURL}"><fmt:message key="topNav.home" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${appURL}/shop"><fmt:message key="topNav.shop" /></a>
                         </li>
                         <c:if test="${not empty sessionScope.activeUser && sessionScope.activeUser.status == 'active' && sessionScope.activeUser.privileges == 'admin'}">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><fmt:message key="topNav.admin" /></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="${appURL}/users">All Users</a></li>
-                                <li><a class="dropdown-item" href="${appURL}/vendors">All Vendors</a></li>
-                                <li><a class="dropdown-item" href="${appURL}/products">All Products</a></li>
-                                <li><a class="dropdown-item" href="${appURL}/orders">All Orders</a></li>
+                                <li><a class="dropdown-item" href="${appURL}/users"><fmt:message key="topNav.allUsers" /></a></li>
+                                <li><a class="dropdown-item" href="${appURL}/vendors"><fmt:message key="topNav.allVendors" /></a></li>
+                                <li><a class="dropdown-item" href="${appURL}/products"><fmt:message key="topNav.allProducts" /></a></li>
+                                <li><a class="dropdown-item" href="${appURL}/orders"><fmt:message key="topNav.allOrders" /></a></li>
                             </ul>
                         </li>
                         </c:if>
                     </ul>
-                    <a href="${appURL}/cart" class="btn btn-primary me-4">
+                    <div class="dropdown me-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <fmt:message key="topNav.language" />
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li>
+                                <a class="dropdown-item" href="?lang=en"><span class="flag-icon flag-icon-us me-2"></span><fmt:message key="topNav.english" /></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="?lang=ar"><span class="flag-icon flag-icon-sa me-2"></span><fmt:message key="topNav.arabic" /></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="?lang=fr"><span class="flag-icon flag-icon-fr me-2"></span><fmt:message key="topNav.french" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="${appURL}/cart" class="btn btn-primary me-2">
                         <i class="bi bi-cart"></i>
                         ${cart.totalProductCount}<c:if test="${not empty cart}">, </c:if>
                         <fmt:formatNumber value="${cart.totalPrice}" type="currency" />
@@ -35,12 +51,12 @@
                     <div class="text-end">
                         <c:choose>
                             <c:when test="${empty sessionScope.activeUser}">
-                                <a href="${appURL}/login" class="btn btn-outline-dark me-2">Login</a>
-                                <a href="${appURL}/signup" class="btn btn-warning">Sign-up</a>
+                                <a href="${appURL}/login" class="btn btn-outline-dark me-2"><fmt:message key="topNav.login" /></a>
+                                <a href="${appURL}/signup" class="btn btn-warning"><fmt:message key="topNav.signup" /></a>
                             </c:when>
                             <c:otherwise>
-                                <a href="${appURL}/signout" class="btn btn-outline-secondary me-2">Sign out</a>
-                                <a href="${appURL}/edit-profile" class="btn btn-primary">Edit Profile</a>
+                                <a href="${appURL}/signout" class="btn btn-outline-secondary me-2"><fmt:message key="topNav.signout" /></a>
+                                <a href="${appURL}/edit-profile" class="btn btn-primary"><fmt:message key="topNav.editProfile" /></a>
                             </c:otherwise>
                         </c:choose>
                         

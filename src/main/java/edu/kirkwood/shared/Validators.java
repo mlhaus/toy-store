@@ -58,7 +58,7 @@ public class Validators {
     }
 
     public static boolean isValidLanguage(String language) {
-        String regex = "^(en-US|es-MX|fr-FR)$";
+        String regex = "^(en|ar|fr)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(language);
         return matcher.matches();
