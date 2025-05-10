@@ -41,17 +41,25 @@
         <c:if test="${page lt totalPages}">
         <li class="page-item">
             <a class="page-link" href="
-    <c:url value="${appURL}/shop">
-    <c:param name="page" value="${page + 1}" />
-    <c:forEach items="${categoriesArr}" var="category">
-    <c:param name="categories" value="${category}" />
-    </c:forEach>
-    <c:if test="${not empty limit}"><c:param name="limit" value="${limit}" /></c:if>
-    </c:url>
-"><i class="bi bi-chevron-right"></i></a>
+                <c:url value="${appURL}/shop">
+                <c:param name="page" value="${page + 1}" />
+                <c:forEach items="${categoriesArr}" var="category">
+                <c:param name="categories" value="${category}" />
+                </c:forEach>
+                <c:if test="${not empty limit}"><c:param name="limit" value="${limit}" /></c:if>
+                </c:url>
+            "><i class="bi bi-chevron-right"></i></a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="${appURL}/shop?page=${totalPages}"><i class="bi bi-chevron-double-right"></i></a>
+            <a class="page-link" href="
+                <c:url value="${appURL}/shop">
+                <c:param name="page" value="${totalPages}" />
+                <c:forEach items="${categoriesArr}" var="category">
+                <c:param name="categories" value="${category}" />
+                </c:forEach>
+                <c:if test="${not empty limit}"><c:param name="limit" value="${limit}" /></c:if>
+                </c:url>
+            "><i class="bi bi-chevron-double-right"></i></a>
         </li>
         </c:if>
     </ul>
